@@ -19,28 +19,31 @@
 </style>
 
 <div id="app">
-  <h1>{{ title }}</h1>
-  <button v-on:click="show = !show">Show / Hide</button>
-  <p v-if="show">I'm part-time visible!</p>
-  <p v-else>Am I visible?</p>
-  <p v-show="show">Hurray, I'm here!</p>
-  <hr>
-  <ul>
-    <li v-for="(person, index) in persons">{{ person.name }} - {{ person.age }} - {{ index }}</li>
-  </ul>
+  <h1>{{ theTitle }}</h1>
+  <p>{{ title | uppercase | lowercase }}</p>
+  <p>{{ message | uppercase }}</p>
 </div>
 
 <script>
+  Vue.filter('uppercase', function(value) {
+    return value.toUpperCase();
+  });
+
   new Vue({
     el: '#app',
     data: {
-      persons: [
-        {name: 'Max', age: 27},
-        {name: 'Chris', age: 30},
-        {name: 'Nora', age: 25}
-      ],
-      show: true,
-      title: 'Conditions and Loops.'
+      message: 'something',
+      title: 'Filter'
+    },
+    computed: {
+      theTitle: function() {
+        return this.title.toUpperCase();
+      }
+    },
+    filters: {
+      lowercase: function(value) {
+        return value.toLowerCase();
+      }
     }
   });
 </script>

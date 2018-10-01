@@ -8,15 +8,27 @@
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+
+<style>
+  .error {
+    background-color: red;
+  }
+  .info {
+    background-color: blue;
+  }
+</style>
+
 <div id="app">
   <h1>{{ title }}</h1>
-  <button v-on:click="changeTitle">Change Title</button>
+  <input type="text" v-on:input="cssClass = $event.target.value">
+  <p v-bind:class="cssClass">Class: {{ cssClass }}</p>
 </div>
 
 <script>
   new Vue({
     el: '#app',
     data: {
+      cssClass: '',
       title: 'Hello World! You are listening a Vue.js workshop.'
     },
     methods: {
